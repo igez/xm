@@ -1,0 +1,22 @@
+version: '2'
+services:
+  X11SERVER:
+    image: suchja/x11server
+    ports:
+      - 5900:5900
+    restart: always
+    container_name: "X11SERVER"
+    environment:
+      - VNC_PASSWORD=password
+  WINE:
+    image: igez/xm
+    restart: always
+    links:
+      - X11SERVER:xserver
+    depends_on:
+      - X11SERVER
+    volumes_from:
+      - X11SERVER
+    environment:
+      - DISPLAY=xserver:0
+    command: "tail -f /dev/null"

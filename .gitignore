@@ -1,0 +1,2 @@
+wine.docker/*
+!wine.docker/.gitkeep
